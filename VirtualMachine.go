@@ -15,6 +15,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 package VirtualMachine
 
 type VirtualMachine interface {
+    GetUUID() string
     Start() error
     Stop() error
     Status() string
