@@ -14,6 +14,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 package VirtualMachine
 
+import (
+    "github.com/coopernurse/gorp"
+)
+
 type VirtualMachine interface {
     GetUUID() string
     Start() error
@@ -28,7 +32,16 @@ type VirtualMachine interface {
     GetPath() string
     IsOnline() bool
     Validate() error
-    Persist() error
-    Delete() error
+    Persist(db *gorp.DbMap) error
+    Delete(db *gorp.DbMap) error
     Archive(archivename string) error
+}
+
+type VirtualMachineError struct {
+    ErrorString string
+    VM VirtualMachine
+}
+
+func (e VirtualMachineError) Error() string {
+    return "[" + e.VM.GetUUID() + "]: " + e.ErrorString
 }
