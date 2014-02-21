@@ -29,7 +29,7 @@ type VirtualMachine interface {
     PrepareHostNetworking() error
     PrepareGuestNetworking() error
     NetworkingStatus() string
-    GetPath() string
+    GetPath() (string, error)
     IsOnline() bool
     Validate() error
     Persist(db *gorp.DbMap) error
