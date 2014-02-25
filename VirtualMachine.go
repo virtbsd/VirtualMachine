@@ -21,6 +21,7 @@ import (
 type VirtualMachine interface {
     GetUUID() string
     Start() error
+    PostStart() error
     Stop() error
     Status() string
     CreateSnapshot(snapname string) error
